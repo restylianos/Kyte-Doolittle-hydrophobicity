@@ -1,0 +1,1 @@
+# Kyte-Doolittle-hydrophobicity
