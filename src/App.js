@@ -22,10 +22,6 @@ function App() {
     SetwindowSize(windowsize);
   };
 
-  useEffect(() => {
-    console.log(windowValid, windowSize);
-  });
-
   return (
     <div className="App">
       <div className="container">

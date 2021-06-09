@@ -6,10 +6,6 @@ export default class FoundData extends React.Component {
     this.state = { sequence: this.props.sequence };
   }
 
-  componentDidMount() {
-    console.log(this.props);
-  }
-
   render() {
     return (
       <div className="box has-text-centered">

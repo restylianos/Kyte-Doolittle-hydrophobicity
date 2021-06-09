@@ -22,7 +22,6 @@ class Searchbar extends React.Component {
   windowSizeChange(e) {
     let value = parseInt(e.target.value);
     if (value % 2 !== 0 && value > 0 && value <= 21 && !isNaN(value)) {
-      console.log('Correct give size');
       this.setState({ windowSize: value, isValidWindowSize: true });
     } else {
       this.setState({ windowSize: value, isValidWindowSize: false });

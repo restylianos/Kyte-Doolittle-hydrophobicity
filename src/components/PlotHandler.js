@@ -28,7 +28,6 @@ export default function PlotHandler(props) {
   const [avgresult, Setavgresult] = useState([]);
 
   useEffect(() => {
-    console.log(props.windowSize);
     if (props.sequence) {
       let positiveHydro = [];
       let res_hydro = [];
