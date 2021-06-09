@@ -10,7 +10,7 @@ class Searchbar extends React.Component {
       sequence: '',
       transmemPoints: [],
       windowSize: 11,
-      isValidWindowSize: false,
+      isValidWindowSize: true,
     };
   }
 
