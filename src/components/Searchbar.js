@@ -4,12 +4,29 @@ import Axios from 'axios';
 class Searchbar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { uniprotAC: '', isValidAC: false, sequence: '', transmemPoints: [] };
+    this.state = {
+      uniprotAC: '',
+      isValidAC: false,
+      sequence: '',
+      transmemPoints: [],
+      windowSize: 11,
+      isValidWindowSize: false,
+    };
   }
 
   inputChage(e) {
     if (!this.validateAC(e.target.value)) return;
     this.setState({ uniprotAC: e.target.value, isValidAC: true });
+  }
+
+  windowSizeChange(e) {
+    let value = parseInt(e.target.value);
+    if (value % 2 !== 0 && value > 0 && value <= 21 && !isNaN(value)) {
+      console.log('Correct give size');
+      this.setState({ windowSize: value, isValidWindowSize: true });
+    } else {
+      this.setState({ windowSize: value, isValidWindowSize: false });
+    }
   }
 
   validateAC(givenac) {
@@ -41,30 +58,49 @@ class Searchbar extends React.Component {
       .catch((error) => {
         console.log(error);
       })
-      .then(() => this.props.getResultsState(this.state.sequence, this.state.transmemPoints));
+      .then(() => this.props.getResultsState(this.state.sequence, this.state.transmemPoints))
+      .then(() => this.props.getWindowResult(this.state.isValidWindowSize))
+      .then(() => this.props.getWindowSize(this.state.windowSize));
   }
-
-  // componentDidUpdate(prevProps, prevState) {
-  //   // console.log(this.state.sequence, this.state.transmemPoints);
-  // }
 
   render() {
     return (
-      <div className="has-text-centered mt-5">
-        <h2 className="title">UniprotAC</h2>
-        <input
-          className="input is-medium"
-          type="text"
-          placeholder="Type the uniprot ID here...(Ex: P07550)"
-          onChange={(e) => this.inputChage(e)}
-        ></input>
-        <button
-          className="button is-rounded is-large is-primary mt-5"
-          onClick={() => this.getResults()}
-        >
-          Go
-        </button>
-      </div>
+      <React.Fragment>
+        <div className="has-text-centered mt-5">
+          <h2 className="title">UniprotAC</h2>
+        </div>
+        <div className="field">
+          <label className="label">Uniprot AC</label>
+          <div className="control">
+            <input
+              className="input is-medium"
+              type="text"
+              placeholder="Type the uniprot AC here...(Ex: P07550)"
+              onChange={(e) => this.inputChage(e)}
+            ></input>
+          </div>
+        </div>
+        <div className="field">
+          <label className="label">Window size</label>
+          <div className="control">
+            <input
+              className="input is-medium"
+              type="text"
+              placeholder="Type window size (default:11)"
+              onChange={(e) => this.windowSizeChange(e)}
+            ></input>
+          </div>
+          {!this.state.isValidWindowSize && <p className="has-text-danger">Invalid window size</p>}
+        </div>
+        <div className="has-text-centered">
+          <button
+            className="button is-rounded is-large is-primary mt-3"
+            onClick={() => this.getResults()}
+          >
+            Go
+          </button>
+        </div>
+      </React.Fragment>
     );
   }
 }

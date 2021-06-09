@@ -28,11 +28,12 @@ export default function PlotHandler(props) {
   const [avgresult, Setavgresult] = useState([]);
 
   useEffect(() => {
+    console.log(props.windowSize);
     if (props.sequence) {
       let positiveHydro = [];
       let res_hydro = [];
       const sequence = props.sequence;
-      const windowSize = 11;
+      const windowSize = props.windowSize;
       let hydropathy_avg = [];
       let avg_values = [];
       let q = 0.0;
@@ -53,14 +54,9 @@ export default function PlotHandler(props) {
         hydropathy_avg[i] = q;
       }
 
-      const result = Object.assign(
-        {},
-        Object.values(hydropathy_avg).filter((v) => v > 0)
-      );
       Setavgresult(hydropathy_avg);
-      console.log(typeof hydropathy_avg);
     }
-  }, [props.sequence]);
+  }, [props.sequence, props.windowSize]);
 
   const data = {
     labels: Object.keys(avgresult),

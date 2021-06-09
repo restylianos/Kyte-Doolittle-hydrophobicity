@@ -6,17 +6,8 @@ export default class FoundData extends React.Component {
     this.state = { sequence: this.props.sequence };
   }
 
-  componentDidUpdate() {
-    console.log('Something');
-    console.log(this.props.sequence);
-  }
-
   componentDidMount() {
     console.log(this.props);
-  }
-
-  test() {
-    console.log(this.props.sequence);
   }
 
   render() {
@@ -24,6 +15,9 @@ export default class FoundData extends React.Component {
       <div className="box has-text-centered">
         <h3 className="title is-3">Found sequence</h3>
         <p className="subtitle is-6 mt-3">{this.props.sequence}</p>
+        <p>
+          <b>Sequence length:</b> {this.props.sequence.length}
+        </p>
       </div>
     );
   }
