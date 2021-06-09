@@ -66,7 +66,7 @@ class Searchbar extends React.Component {
     return (
       <React.Fragment>
         <div className="has-text-centered mt-5">
-          <h2 className="title">UniprotAC</h2>
+          <h2 className="title">Sliding Window Method</h2>
         </div>
         <div className="field">
           <label className="label">Uniprot AC</label>
