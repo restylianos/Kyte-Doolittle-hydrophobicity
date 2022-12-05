@@ -40,7 +40,7 @@ class Searchbar extends React.Component {
     const givenAC = this.state.uniprotAC;
     let sequence = '';
     let points_arr = [];
-    Axios.get(`https://www.uniprot.org/uniprot/${givenAC}.txt`)
+    Axios.get(`https://rest.uniprot.org/uniprotkb/${givenAC}.txt`)
       .then((response) => {
         const transmemPoints = response.data.match(transmemRegex);
         const sequenceParts = response.data.match(sequenceRegex);
